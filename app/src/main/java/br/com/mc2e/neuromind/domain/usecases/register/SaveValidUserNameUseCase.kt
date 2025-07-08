@@ -10,11 +10,16 @@ import javax.inject.Inject
 class SaveValidUserNameUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
+    //TODO Descomentar
     suspend fun execute(name: String): Result<Name> {
         return try {
-            val validatedName = Name.create(name)
-            userRepository.saveUserName(validatedName.getValue())
-            Result.Success(validatedName)
+//            val validatedName = Name.create(name)
+//            userRepository.saveUserName(validatedName.getValue())
+//            Result.Success(validatedName)
+
+            Result.Success(Name.create(name))
+
+//            Result.Error(ValidationFailure.InvalidCompleteName)
         } catch (_: ValidationException.CompleteNameValidationException) {
             Result.Error(ValidationFailure.InvalidCompleteName)
         } catch (_: ValidationException.NameValidationException) {

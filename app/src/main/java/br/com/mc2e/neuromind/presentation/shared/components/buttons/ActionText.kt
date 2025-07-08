@@ -3,6 +3,7 @@ package br.com.mc2e.neuromind.presentation.shared.components.buttons
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,19 +26,21 @@ import br.com.mc2e.neuromind.ui.theme.xxSmallValue
 @Composable
 fun ActionText(
     onTapping: () -> Unit,
-    message: String,
+    message: String?,
     actionText: String,
 
-) {
+    ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = message,
-            style = bodyMediumLight.copy(color = MaterialTheme.colorScheme.onBackground)
-        )
+        message?.let {
+            Text(
+                text = message,
+                style = bodyMediumLight.copy(color = MaterialTheme.colorScheme.onBackground)
+            )
+        }
         TextButton(
             contentPadding = PaddingValues(start = xxSmallValue, end = smallValue),
             onClick = onTapping,
@@ -58,12 +61,23 @@ fun ActionText(
 @Composable
 fun RegisterActionTextPreview() {
     NeuroMindTheme {
-        Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-            ActionText(
-                onTapping = {},
-                message = stringResource(R.string.do_not_have_account_yet),
-                actionText = stringResource(R.string.register)
-            )
+        Column {
+
+            Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+                ActionText(
+                    onTapping = {},
+                    message = stringResource(R.string.do_not_have_account_yet),
+                    actionText = stringResource(R.string.register)
+                )
+            }
+
+            Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+                ActionText(
+                    onTapping = {},
+                    message = null,
+                    actionText = stringResource(R.string.to_back)
+                )
+            }
         }
     }
 }
