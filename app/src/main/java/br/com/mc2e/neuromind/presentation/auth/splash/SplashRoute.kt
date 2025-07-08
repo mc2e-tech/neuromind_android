@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.mc2e.neuromind.presentation.navigation.Screen
+import br.com.mc2e.neuromind.presentation.shared.navigation.Screen
 
 @Composable
 fun SplashRoute(navController: NavController) {

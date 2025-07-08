@@ -25,9 +25,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import br.com.mc2e.neuromind.R
-import br.com.mc2e.neuromind.presentation.components.buttons.ActionText
-import br.com.mc2e.neuromind.presentation.components.buttons.PrimaryButton
-import br.com.mc2e.neuromind.presentation.components.textFields.CustomOutlinedTextFiled
+import br.com.mc2e.neuromind.presentation.shared.components.buttons.ActionText
+import br.com.mc2e.neuromind.presentation.shared.components.buttons.PrimaryButton
+import br.com.mc2e.neuromind.presentation.shared.components.textFields.CustomOutlinedTextFiled
 import br.com.mc2e.neuromind.presentation.register.components.RegisterHeader
 import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
 import br.com.mc2e.neuromind.ui.theme.horizontalPaddingValue

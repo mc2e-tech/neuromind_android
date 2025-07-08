@@ -20,8 +20,8 @@ import br.com.mc2e.neuromind.presentation.auth.login.LoginUiEvent
 import br.com.mc2e.neuromind.presentation.auth.login.LoginUiState
 import br.com.mc2e.neuromind.presentation.auth.login.LoginUserInputEvent
 import br.com.mc2e.neuromind.presentation.auth.login.components.ForgotPasswordButton
-import br.com.mc2e.neuromind.presentation.components.buttons.ActionText
-import br.com.mc2e.neuromind.presentation.components.buttons.PrimaryButton
+import br.com.mc2e.neuromind.presentation.shared.components.buttons.ActionText
+import br.com.mc2e.neuromind.presentation.shared.components.buttons.PrimaryButton
 import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
 import br.com.mc2e.neuromind.ui.theme.horizontalPaddingValue
 import br.com.mc2e.neuromind.ui.theme.verticalMediumPadding

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
-import br.com.mc2e.neuromind.presentation.navigation.AppNavGraph
+import br.com.mc2e.neuromind.presentation.shared.navigation.AppNavGraph
 import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
 import dagger.hilt.android.AndroidEntryPoint
 

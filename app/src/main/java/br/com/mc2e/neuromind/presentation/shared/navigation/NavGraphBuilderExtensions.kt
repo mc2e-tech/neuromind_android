@@ -1,4 +1,4 @@
-package br.com.mc2e.neuromind.presentation.navigation
+package br.com.mc2e.neuromind.presentation.shared.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder

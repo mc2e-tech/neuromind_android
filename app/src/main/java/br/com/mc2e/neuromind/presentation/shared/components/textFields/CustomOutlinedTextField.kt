@@ -1,4 +1,4 @@
-package br.com.mc2e.neuromind.presentation.components.textFields
+package br.com.mc2e.neuromind.presentation.shared.components.textFields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -1,4 +1,4 @@
-package br.com.mc2e.neuromind.presentation.components.buttons
+package br.com.mc2e.neuromind.presentation.shared.components.buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

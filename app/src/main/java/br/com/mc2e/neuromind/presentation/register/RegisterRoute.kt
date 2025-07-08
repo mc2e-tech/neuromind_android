@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.mc2e.neuromind.presentation.navigation.Screen
+import br.com.mc2e.neuromind.presentation.shared.navigation.Screen
 
 @Composable
 fun RegisterRoute(

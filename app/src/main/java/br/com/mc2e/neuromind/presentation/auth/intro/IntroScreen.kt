@@ -1,3 +1,5 @@
+package br.com.mc2e.neuromind.presentation.auth.intro
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +19,7 @@ import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
 import br.com.mc2e.neuromind.ui.theme.mediumValue
 
 @Composable
-fun HomeScreen(
+fun IntroScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController? = null
 ) {
@@ -31,7 +33,7 @@ fun HomeScreen(
     ) {
         PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(R.string.back),
+            text = stringResource(R.string.login),
             onClick = {
                 navController?.navigate(Screen.Login.route) {
                     popUpTo(0)
@@ -43,8 +45,8 @@ fun HomeScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
+fun IntroScreenPreview() {
     NeuroMindTheme {
-        HomeScreen()
+        IntroScreen()
     }
 }

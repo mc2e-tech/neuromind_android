@@ -39,7 +39,7 @@ abstract class InfrastructureModule {
 
     companion object {
         //todo: passar para o env
-        private const val BASE_URL = "http://192.168.3.116:3000/"
+        private const val BASE_URL = "https://neuromind-prd.up.railway.app/"
 
         @Provides
         @Singleton

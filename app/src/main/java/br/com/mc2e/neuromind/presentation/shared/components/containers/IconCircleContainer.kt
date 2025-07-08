@@ -1,4 +1,4 @@
-package br.com.mc2e.neuromind.presentation.components.containers
+package br.com.mc2e.neuromind.presentation.shared.components.containers
 
 import CanvasAlphaCircle
 import androidx.compose.foundation.background

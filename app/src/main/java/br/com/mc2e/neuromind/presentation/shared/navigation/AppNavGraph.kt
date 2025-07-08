@@ -1,13 +1,10 @@
-package br.com.mc2e.neuromind.presentation.navigation
+package br.com.mc2e.neuromind.presentation.shared.navigation
 
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import br.com.mc2e.neuromind.presentation.auth.intro.IntroRoute
 import br.com.mc2e.neuromind.presentation.auth.login.LoginRoute
 import br.com.mc2e.neuromind.presentation.auth.splash.SplashRoute
 import br.com.mc2e.neuromind.presentation.home.HomeRoute
@@ -24,6 +21,9 @@ fun AppNavGraph(navController: NavHostController) {
         }
         composable(Screen.Login.route) {
             LoginRoute(navController)
+        }
+        composable(Screen.Intro.route) {
+            IntroRoute(navController)
         }
         composable(Screen.Home.route) {
             HomeRoute(navController)
