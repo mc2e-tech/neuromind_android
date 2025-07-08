@@ -1,5 +1,12 @@
 package br.com.mc2e.neuromind.presentation.register
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -8,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.mc2e.neuromind.presentation.navigation.Screen
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun RegisterRoute(
     navController: NavController,
@@ -25,49 +33,64 @@ fun RegisterRoute(
                 is RegisterUiEvent.NavigateToLogin -> navController.navigate(Screen.Login.route) {
                     popUpTo(Screen.Register.route) { inclusive = true }
                 }
+
                 is RegisterUiEvent.NavigateToHome -> navController.navigate(Screen.Home.route) {
                     popUpTo(Screen.Register.route) { inclusive = true }
                 }
+
                 else -> {}
             }
         }
     }
 
 
-    when (uiState) {
-        is RegisterUiState.NameStep -> NameScreen(
-            uiState = uiState as RegisterUiState.NameStep,
-            onEvent = viewModel::onEvent,
-        )
+    AnimatedContent(
+        targetState = uiState::class,
+        transitionSpec = {
+            fadeIn(
+                animationSpec = tween(durationMillis = 900, easing = FastOutSlowInEasing),
+                initialAlpha = 0.3f
+            ) togetherWith fadeOut(
+                animationSpec = tween(durationMillis = 900, easing = FastOutSlowInEasing)
+            )
+        },
+        label = "RegisterContentAnimation"
+    ) { state ->
 
-        is RegisterUiState.EmailStep ->
-            //TODO: Criar tela de email
-            NameScreen(
-                uiState = RegisterUiState.NameStep(),
+        when (state) {
+            RegisterUiState.NameStep::class -> NameScreen(
+                uiState = (uiState as? RegisterUiState.NameStep) ?: RegisterUiState.NameStep(),
                 onEvent = viewModel::onEvent,
             )
 
-        is RegisterUiState.PasswordStep ->
-            //TODO: Criar tela de senha
-            NameScreen(
-                uiState = RegisterUiState.NameStep(),
-                onEvent = viewModel::onEvent,
-            )
+            RegisterUiState.EmailStep::class ->
+                EmailScreen(
+                    uiState = (uiState as? RegisterUiState.EmailStep)
+                        ?: RegisterUiState.EmailStep(),
+                    onEvent = viewModel::onEvent,
+                )
 
-        is RegisterUiState.Success ->
-            //TODO: Criar tela de sucesso
-            NameScreen(
-                uiState = RegisterUiState.NameStep(),
-                onEvent = viewModel::onEvent,
-            )
+            RegisterUiState.PasswordStep::class ->
+                //TODO: Criar tela de senha
+                NameScreen(
+                    uiState = (uiState as? RegisterUiState.NameStep) ?: RegisterUiState.NameStep(),
+                    onEvent = viewModel::onEvent,
+                )
 
-        is RegisterUiState.Error ->
-            //TODO: Criar tela de erro
-            NameScreen(
-                uiState = RegisterUiState.NameStep(),
-                onEvent = viewModel::onEvent,
-            )
+            RegisterUiState.Success::class ->
+                //TODO: Criar tela de sucesso
+                NameScreen(
+                    uiState = (uiState as? RegisterUiState.NameStep) ?: RegisterUiState.NameStep(),
+                    onEvent = viewModel::onEvent,
+                )
+
+            RegisterUiState.Error::class ->
+                //TODO: Criar tela de erro
+                NameScreen(
+                    uiState = (uiState as? RegisterUiState.NameStep) ?: RegisterUiState.NameStep(),
+                    onEvent = viewModel::onEvent,
+                )
+        }
     }
-
 
 }

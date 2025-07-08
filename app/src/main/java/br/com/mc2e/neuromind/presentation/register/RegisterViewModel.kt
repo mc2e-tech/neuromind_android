@@ -66,24 +66,6 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private fun handleEmailStep(
-        event: RegisterUserInputEvent,
-        step: RegisterUiState.EmailStep
-    ) {
-
-        when (event) {
-            is RegisterUserInputEvent.EmailChanged -> {
-                _uiState.value = step.copy(email = event.value, error = null)
-            }
-            is RegisterUserInputEvent.OnBack -> {
-                _uiState.value = RegisterUiState.NameStep(name = name?.getValue() ?: "")
-            }
-            //TODO: Continuar esse método
-            else -> {}
-        }
-    }
-
-
     private suspend fun handleNameStep(
         event: RegisterUserInputEvent,
         state: RegisterUiState.NameStep
@@ -135,6 +117,23 @@ class RegisterViewModel @Inject constructor(
             _uiState.value = RegisterUiState.EmailStep()
         } catch (_: Exception) {
             _uiState.value = RegisterUiState.NameStep()
+        }
+    }
+
+    private fun handleEmailStep(
+        event: RegisterUserInputEvent,
+        step: RegisterUiState.EmailStep
+    ) {
+
+        when (event) {
+            is RegisterUserInputEvent.EmailChanged -> {
+                _uiState.value = step.copy(email = event.value, error = null)
+            }
+            is RegisterUserInputEvent.OnBack -> {
+                _uiState.value = RegisterUiState.NameStep(name = name?.getValue() ?: "")
+            }
+            //TODO: Continuar esse método
+            else -> {}
         }
     }
 
