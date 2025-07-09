@@ -6,6 +6,7 @@ import br.com.mc2e.neuromind.R
 import br.com.mc2e.neuromind.domain.usecases.register.SaveValidUserNameUseCase
 import br.com.mc2e.neuromind.domain.commons.Result
 import br.com.mc2e.neuromind.domain.failures.ValidationFailure
+import br.com.mc2e.neuromind.domain.usecases.register.SaveValidUserEmailUseCase
 import br.com.mc2e.neuromind.domain.valueObjects.Email
 import br.com.mc2e.neuromind.domain.valueObjects.Name
 import br.com.mc2e.neuromind.domain.valueObjects.Password
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val saveValidUserNameUseCase: SaveValidUserNameUseCase,
+    private val saveValidUserEmailUseCase: SaveValidUserEmailUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<RegisterUiState>(RegisterUiState.NameStep())
@@ -90,7 +92,7 @@ class RegisterViewModel @Inject constructor(
             when (val result = saveValidUserNameUseCase.execute(nameValue)) {
                 is Result.Success -> {
                     name = result.data
-                    _uiState.value = RegisterUiState.EmailStep()
+                    _uiState.value = RegisterUiState.EmailStep(email = email?.getValue() ?: "")
                 }
 
                 is Result.Error -> {
@@ -129,11 +131,30 @@ class RegisterViewModel @Inject constructor(
             is RegisterUserInputEvent.EmailChanged -> {
                 _uiState.value = step.copy(email = event.value, error = null)
             }
+            is RegisterUserInputEvent.NextStepClicked -> {
+                validateEmail(step.email, step)
+            }
             is RegisterUserInputEvent.OnBack -> {
                 _uiState.value = RegisterUiState.NameStep(name = name?.getValue() ?: "")
             }
-            //TODO: Continuar esse método
             else -> {}
+        }
+    }
+
+    private fun validateEmail(emailValue: String, state: RegisterUiState.EmailStep) {
+        viewModelScope.launch {
+
+            when (val result = saveValidUserEmailUseCase.execute(emailValue)) {
+                is Result.Success -> {
+                    email = result.data
+                    _uiState.value = RegisterUiState.PasswordStep()
+                }
+
+                is Result.Error -> {
+                    _uiState.value = state.copy(error = R.string.invalid_email)
+                }
+            }
+
         }
     }
 
@@ -147,6 +168,5 @@ class RegisterViewModel @Inject constructor(
             _uiState.value = RegisterUiState.NameStep()
         }
     }
-
 
 }

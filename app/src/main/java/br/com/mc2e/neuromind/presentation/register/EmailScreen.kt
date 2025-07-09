@@ -40,7 +40,7 @@ fun EmailScreen(
     uiState: RegisterUiState.EmailStep,
     onEvent: (RegisterUserInputEvent) -> Unit,
 ) {
-    val nameFocusRequester = remember { FocusRequester() }
+    val emailFocusRequester = remember { FocusRequester() }
 
     val navigationBarPadding =
         WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
@@ -67,11 +67,11 @@ fun EmailScreen(
         ) {
             Spacer(modifier = verticalXXXXLargePadding)
             CustomOutlinedTextFiled(
-                modifier = Modifier.focusRequester(nameFocusRequester),
+                modifier = Modifier.focusRequester(emailFocusRequester),
                 leadingIconId = R.drawable.outline_email_icon,
                 placeholder = stringResource(R.string.enter_your_email_placeholder),
                 value = uiState.email,
-                onValueChange = { onEvent(RegisterUserInputEvent.NameChanged(it)) },
+                onValueChange = { onEvent(RegisterUserInputEvent.EmailChanged(it)) },
                 label = stringResource(R.string.email),
                 errorMessage = uiState.error?.let { stringResource(uiState.error)  },
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -79,7 +79,7 @@ fun EmailScreen(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        nameFocusRequester.freeFocus()
+                        emailFocusRequester.freeFocus()
                         onEvent(RegisterUserInputEvent.NextStepClicked)
                     }
                 )
