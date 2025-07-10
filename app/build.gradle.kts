@@ -19,11 +19,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        android.buildFeatures.buildConfig = true
+
+        buildConfigField("String", "BASE_URL", "\"https://mc2e.tech/\"")
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://mc2e.tech/\"")
+            buildConfigField("String", "APP_KEY", "\"f4617224d71b2e02cab2afc02ba2755e\"")
+        }
         release {
-            isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL", "\"https://mc2e.tech/\"")
+            buildConfigField("String", "APP_KEY", "\"f4617224d71b2e02cab2afc02ba2755e\"")
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

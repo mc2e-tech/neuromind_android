@@ -1,10 +1,12 @@
 package br.com.mc2e.neuromind.di
 
+import br.com.mc2e.neuromind.BuildConfig
 import br.com.mc2e.neuromind.data.datasources.remote.apis.AuthApi
 import br.com.mc2e.neuromind.infrastructure.local.storage.SecureStorage
 import br.com.mc2e.neuromind.infrastructure.local.storage.SecureStorageImpl
 import br.com.mc2e.neuromind.infrastructure.local.storage.UserPreferencesStorage
 import br.com.mc2e.neuromind.infrastructure.local.storage.UserPreferencesStorageImpl
+import br.com.mc2e.neuromind.infrastructure.remote.interceptors.AppKeyInterceptor
 import br.com.mc2e.neuromind.infrastructure.remote.interceptors.JwtInterceptor
 import br.com.mc2e.neuromind.infrastructure.remote.interceptors.TokenRefreshInterceptor
 import br.com.mc2e.neuromind.infrastructure.remote.services.JwtDecoder
@@ -19,6 +21,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -38,9 +41,6 @@ abstract class InfrastructureModule {
     ): UserPreferencesStorage
 
     companion object {
-        //todo: passar para o env
-        private const val BASE_URL = "https://neuromind-prd.up.railway.app/"
-
         @Provides
         @Singleton
         fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
@@ -59,11 +59,16 @@ abstract class InfrastructureModule {
         @Singleton
         fun provideOkHttpClient(
             loggingInterceptor: HttpLoggingInterceptor,
+            appKeyInterceptor: AppKeyInterceptor,
             jwtInterceptor: JwtInterceptor,
             tokenRefreshInterceptor: TokenRefreshInterceptor
         ): OkHttpClient {
             return OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(appKeyInterceptor)
                 .addInterceptor(jwtInterceptor)
                 .addInterceptor(tokenRefreshInterceptor)
                 .build()
@@ -81,7 +86,7 @@ abstract class InfrastructureModule {
         @Singleton
         fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
             return Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .build()
