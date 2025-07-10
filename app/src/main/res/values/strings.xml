@@ -17,13 +17,15 @@
     <string name="register">Registrar</string>
     <string name="onboarding_start">Vamos começar!</string>
     <string name="name_prompt_description">Precisamos do seu nome para\npersonalizar sua experiência.</string>
+    <string name="email_prompt_description">Precisamos do seu e-mail\npara criar sua conta.</string>
     <string name="enter_your_name">Informe o seu nome completo</string>
+    <string name="enter_your_email_placeholder">Informe o seu email</string>
     <string name="name">Nome</string>
     <string name="do_have_account">Já tem uma conta?</string>
     <string name="to_enter">Entrar</string>
     <string name="to_continue">Continuar</string>
     <string name="incomplete_name">Digite o seu nome completo.</string>
     <string name="invalid_name">Nome inválido.</string>
-
-
+    <string name="email_description">Simbolo de @ para o e-mail</string>
+    <string name="to_back">Voltar</string>
 </resources>

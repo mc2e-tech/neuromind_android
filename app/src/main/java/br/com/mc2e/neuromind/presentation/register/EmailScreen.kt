@@ -25,22 +25,22 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import br.com.mc2e.neuromind.R
+import br.com.mc2e.neuromind.presentation.register.components.RegisterHeader
 import br.com.mc2e.neuromind.presentation.shared.components.buttons.ActionText
 import br.com.mc2e.neuromind.presentation.shared.components.buttons.PrimaryButton
 import br.com.mc2e.neuromind.presentation.shared.components.textFields.CustomOutlinedTextFiled
-import br.com.mc2e.neuromind.presentation.register.components.RegisterHeader
 import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
 import br.com.mc2e.neuromind.ui.theme.horizontalPaddingValue
 import br.com.mc2e.neuromind.ui.theme.verticalLargePadding
 import br.com.mc2e.neuromind.ui.theme.verticalXXXXLargePadding
 
 @Composable
-fun NameScreen(
+fun EmailScreen(
     modifier: Modifier = Modifier,
-    uiState: RegisterUiState.NameStep,
+    uiState: RegisterUiState.EmailStep,
     onEvent: (RegisterUserInputEvent) -> Unit,
 ) {
-    val nameFocusRequester = remember { FocusRequester() }
+    val emailFocusRequester = remember { FocusRequester() }
 
     val navigationBarPadding =
         WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
@@ -52,12 +52,12 @@ fun NameScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         RegisterHeader(
-            iconId = R.drawable.outline_brain_icon,
-            iconDescription = stringResource(R.string.brain_logo_description),
+            iconId = R.drawable.outline_user_email_icon,
+            iconDescription = stringResource(R.string.email_description),
             modifier = Modifier.size(44.dp),
             title = stringResource(R.string.onboarding_start),
-            description = stringResource(R.string.name_prompt_description),
-            targetProgress = 2f / 5f
+            description = stringResource(R.string.email_prompt_description),
+            targetProgress = 3f / 5f
         )
         Column(
             modifier = Modifier
@@ -67,19 +67,19 @@ fun NameScreen(
         ) {
             Spacer(modifier = verticalXXXXLargePadding)
             CustomOutlinedTextFiled(
-                modifier = Modifier.focusRequester(nameFocusRequester),
-                leadingIconId = R.drawable.outline_user_icon,
-                placeholder = stringResource(R.string.enter_your_name),
-                value = uiState.name,
-                onValueChange = { onEvent(RegisterUserInputEvent.NameChanged(it)) },
-                label = stringResource(R.string.name),
+                modifier = Modifier.focusRequester(emailFocusRequester),
+                leadingIconId = R.drawable.outline_email_icon,
+                placeholder = stringResource(R.string.enter_your_email_placeholder),
+                value = uiState.email,
+                onValueChange = { onEvent(RegisterUserInputEvent.EmailChanged(it)) },
+                label = stringResource(R.string.email),
                 errorMessage = uiState.error?.let { stringResource(uiState.error)  },
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Next
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        nameFocusRequester.freeFocus()
+                        emailFocusRequester.freeFocus()
                         onEvent(RegisterUserInputEvent.NextStepClicked)
                     }
                 )
@@ -89,15 +89,15 @@ fun NameScreen(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.to_continue),
                 enabled =
-                    uiState.name.isNotEmpty(),
+                    uiState.email.isNotEmpty(),
                 loading = false,
                 onClick = { onEvent(RegisterUserInputEvent.NextStepClicked) },
             )
             Spacer(modifier = Modifier.weight(1f))
             ActionText(
-                onTapping = { onEvent(RegisterUserInputEvent.LoginClicked) },
-                message = stringResource(R.string.do_have_account),
-                actionText = stringResource(R.string.to_enter)
+                onTapping = { onEvent(RegisterUserInputEvent.OnBack) },
+                message = null,
+                actionText = stringResource(R.string.to_back)
             )
             Spacer(modifier = Modifier.height(navigationBarPadding))
         }
@@ -108,10 +108,10 @@ fun NameScreen(
 
 @PreviewLightDark()
 @Composable
-private fun PreviewNameScreen() {
+private fun PreviewEmailScreen() {
     NeuroMindTheme {
-        NameScreen(
-            uiState = RegisterUiState.NameStep(),
+        EmailScreen(
+            uiState = RegisterUiState.EmailStep(),
             onEvent = {},
         )
     }
