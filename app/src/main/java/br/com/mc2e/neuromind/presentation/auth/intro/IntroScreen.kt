@@ -118,7 +118,7 @@ fun IntroScreen(
         Spacer(modifier = verticalXXLargePadding)
         OnPrimaryButton(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(R.string.to_enter),
+            text = stringResource(R.string.init),
             onClick = { onEvent(IntroUserInputEvent.RegisterClicked) }
         )
         Spacer(modifier = verticalSmallPadding)
