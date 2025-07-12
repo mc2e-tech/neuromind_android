@@ -2,6 +2,7 @@ package br.com.mc2e.neuromind.di
 
 import br.com.mc2e.neuromind.domain.repositories.AuthRepository
 import br.com.mc2e.neuromind.domain.repositories.UserRepository
+import br.com.mc2e.neuromind.domain.usecases.auth.DisableUserFirstAccessUseCase
 import br.com.mc2e.neuromind.domain.usecases.auth.LoginUseCase
 import br.com.mc2e.neuromind.domain.usecases.auth.LogoutUseCase
 import br.com.mc2e.neuromind.domain.usecases.auth.SilentLoginUseCase
@@ -90,5 +91,13 @@ object DomainModule {
     @Singleton
     fun provideValidateUserPasswordUseCase(): ValidateUserPasswordUseCase {
         return ValidateUserPasswordUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDisableUserFirstAccessUseCase(
+        authRepository: AuthRepository
+    ): DisableUserFirstAccessUseCase {
+        return DisableUserFirstAccessUseCase(authRepository)
     }
 }

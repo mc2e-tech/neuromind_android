@@ -18,7 +18,6 @@ import br.com.mc2e.neuromind.infrastructure.remote.services.JwtDecoder
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class AuthRepositoryImpl @Inject constructor(
     private val authRemoteDataSource: AuthRemoteDataSource,
@@ -50,6 +49,15 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout(): Result<Unit> {
         return try {
             authLocalSecureDataSource.clearTokens()
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Result.Error(Failure.Unexpected(e))
+        }
+    }
+
+    override suspend fun disableUserFirstAccess(): Result<Unit> {
+        return try {
+            userLocalDataSource.saveIsFirstAccess(false)
             Result.Success(Unit)
         } catch (e: Exception) {
             Result.Error(Failure.Unexpected(e))

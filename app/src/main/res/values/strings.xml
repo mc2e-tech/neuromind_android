@@ -28,4 +28,9 @@
     <string name="invalid_name">Nome inválido.</string>
     <string name="email_description">Simbolo de @ para o e-mail</string>
     <string name="to_back">Voltar</string>
+    <string name="person_logo_description">Icone de uma pessoa ou usuario</string>
+    <string name="people_logo_description">Icone de mais de uma pessoa</string>
+    <string name="heart_logo_description">Icone de um coração</string>
+    <string name="intro_message">Feito especialmente para psicoterapeutas\nque valorizam eficiência e cuidado.</string>
+    <string name="from_mc2e">from mc2e</string>
 </resources>

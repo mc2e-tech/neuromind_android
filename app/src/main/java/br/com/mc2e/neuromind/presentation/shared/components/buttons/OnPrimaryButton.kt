@@ -1,89 +1,69 @@
 package br.com.mc2e.neuromind.presentation.shared.components.buttons
 
-import android.graphics.Color
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
+import br.com.mc2e.neuromind.ui.theme.Purple400
 import br.com.mc2e.neuromind.ui.theme.smallValue
 import br.com.mc2e.neuromind.ui.theme.verticalSmallPadding
 
 @Composable
-fun PrimaryButton(
+fun OnPrimaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     loading: Boolean = false,
-    colors: ButtonColors? = null,
 ) {
-    Button(
+    PrimaryButton(
+        text = text,
+        loading = loading,
+        modifier = modifier,
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(52.dp),
-        shape = RoundedCornerShape(8.dp),
         enabled = enabled && !loading,
-        colors = colors ?: ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
+        colors =  ButtonDefaults.buttonColors(
+            containerColor =  Color.White,
+            contentColor = Purple400,
+            disabledContentColor = Color.White,
+            disabledContainerColor = Color.White.copy(alpha = 0.4f)
         )
-    ) {
-        if (loading) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.onPrimary,
-                strokeWidth = 2.dp,
-                modifier = Modifier.size(20.dp)
-            )
-        } else {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
-    }
+    )
 }
 
 @PreviewLightDark()
 @Composable
-private fun PrimaryButtonPreview() {
+private fun OnPrimaryButtonPreview() {
     NeuroMindTheme {
         Column(
             modifier = Modifier
                 .padding(smallValue)
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.primary)
                 .width(300.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            PrimaryButton(
+            OnPrimaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Primary", onClick = {})
             Spacer(modifier = verticalSmallPadding)
-            PrimaryButton(
+            OnPrimaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = false,
                 text = "Primary", onClick = {})
             Spacer(modifier = verticalSmallPadding)
-            PrimaryButton(
+            OnPrimaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 loading = true,
                 text = "Primary", onClick = {})

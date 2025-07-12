@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import br.com.mc2e.neuromind.R
 import br.com.mc2e.neuromind.presentation.shared.components.containers.DefaultPageHeader
-import br.com.mc2e.neuromind.presentation.shared.components.containers.SimpleIconCircleContainer
+import br.com.mc2e.neuromind.presentation.shared.components.icons.SimpleIconCircleContainer
 import br.com.mc2e.neuromind.ui.theme.verticalMediumPadding
 import br.com.mc2e.neuromind.ui.theme.verticalXLargePadding
 import br.com.mc2e.neuromind.ui.theme.verticalXXLargePadding

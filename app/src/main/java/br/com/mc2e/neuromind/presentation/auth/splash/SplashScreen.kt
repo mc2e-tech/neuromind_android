@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import br.com.mc2e.neuromind.R
+import br.com.mc2e.neuromind.presentation.shared.components.icons.SimpleIconAbsolutePosition
 import br.com.mc2e.neuromind.ui.theme.NeuroMindTheme
 import br.com.mc2e.neuromind.ui.theme.Purple300
 import br.com.mc2e.neuromind.ui.theme.Purple400
@@ -88,40 +89,20 @@ fun SplashScreen(
             contentDescription = stringResource(R.string.brain_logo_description),
             tint = MaterialTheme.colorScheme.onPrimary
         )
-        IconWithCircle(
+        SimpleIconAbsolutePosition(
             iconId = R.drawable.outline_person_icon,
+            iconDescription = stringResource(R.string.person_logo_description),
             iconOffset = icon1Offset
         )
-        IconWithCircle(
+        SimpleIconAbsolutePosition(
             iconId = R.drawable.outline_people_icon,
+            iconDescription = stringResource(R.string.people_logo_description),
             iconOffset = icon2Offset
         )
-        IconWithCircle(
+        SimpleIconAbsolutePosition(
             iconId = R.drawable.outline_heart_icon,
+            iconDescription = stringResource(R.string.heart_logo_description),
             iconOffset = icon3Offset
-        )
-    }
-}
-
-@Composable
-fun IconWithCircle(iconId: Int, iconOffset: Offset) {
-    Box(
-        modifier = Modifier
-            .absoluteOffset {
-                IntOffset(iconOffset.x.roundToInt(), iconOffset.y.roundToInt())
-            }
-            .size(40.dp)
-            .background(
-                color = Color.White.copy(alpha = 0.1f),
-                shape = CircleShape
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            painter = painterResource(iconId),
-            contentDescription = stringResource(R.string.brain_logo_description),
-            tint = MaterialTheme.colorScheme.onPrimary,
-            modifier = Modifier.size(21.dp)
         )
     }
 }
